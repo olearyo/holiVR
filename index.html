@@ -22,11 +22,13 @@
   <body>
     <div id="example"></div>
 
-  <script src="js/third-party/threejs/three.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js" integrity="sha256-gSh8eotzb/CVvCREGPUNgIWuDnTYnZvVOQnRrP1eDjI=" crossorigin="anonymous"></script>
+  <script src="js/three.js"></script>
+  <script src="js/three.min.js"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js" integrity="sha256-gSh8eotzb/CVvCREGPUNgIWuDnTYnZvVOQnRrP1eDjI=" crossorigin="anonymous"></script> -->
   <script src="js/third-party/threejs/StereoEffect.js"></script>
   <script src="js/third-party/threejs/DeviceOrientationControls.js"></script>
   <script src="js/third-party/threejs/OrbitControls.js"></script>
+  
 
   <script>
     var camera, scene, renderer;
@@ -113,12 +115,12 @@
       audioLoader.load( 'sound/sound.mp3', function( buffer ) {
         sound.setBuffer( buffer );
         sound.setRefDistance( 20 );
-        sound.play();
+        // sound.play();
       });
 
       // fog effect
-      // scene.background = new THREE.Color(  );
-      scene.fog = new THREE.FogExp2(0xF29E66, 0.0005);
+      // scene.background = new THREE.Color(0xff0000);
+      scene.fog = new THREE.FogExp2(0xd8d8ff, 0.0005);
 
       // people images on screen
       picTextureArray = ['images/boy1.png', 'images/couple1.png', 'images/girl1.png', 'images/jump.png', 'images/aunty.png', 'images/excited.png'];
