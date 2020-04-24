@@ -8,6 +8,7 @@
       body {
         margin: 0px;
         overflow: hidden;
+        background-color:bisque;
       }
       #example {
         position: absolute;
@@ -114,6 +115,32 @@
         sound.setRefDistance( 20 );
         sound.play();
       });
+
+      // fog effect
+      // scene.background = new THREE.Color(  );
+      scene.fog = new THREE.FogExp2(0xF29E66, 0.0005);
+
+      // people images on screen
+      picTextureArray = ['images/boy1.png', 'images/couple1.png', 'images/girl1.png', 'images/jump.png', 'images/aunty.png', 'images/excited.png'];
+      meshObjects = []
+      positionXArray = [20, 0, 30, 20, 40, -10];
+      positionYArray = [12, 14, 16, 15, 14, 12];
+      positionZArray = [30, 30, -20, -40, 30, -40];
+      var picW = [20, 20, 20, 20, 20, 20];
+      var picH = [30, 25, 15, , 25, 25];
+
+      for (var i = 0; i < picTextureArray.length; i++) {
+        picTexture = new THREE.ImageUtils.loadTexture(picTextureArray[i]);
+        var picMaterial = new THREE.MeshBasicMaterial({ map: picTexture, side: THREE.DoubleSide, transparent: true });
+        var picGeometry = new THREE.PlaneGeometry(picW[i], picH[i]);
+
+        var pic = new THREE.Mesh(picGeometry, picMaterial);
+        pic.position.z = positionZArray[i];
+        pic.position.x = positionXArray[i];
+        pic.position.y = positionYArray[i];
+        meshObjects.push(pic)
+        scene.add(pic);
+      }
 
       // create an object for the sound to play from
       var sphere = new THREE.SphereBufferGeometry( 20, 32, 16 );
