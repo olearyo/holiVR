@@ -36,6 +36,9 @@
     var element, container;
 
     var clock = new THREE.Clock();
+    var raycaster = new THREE.Raycaster();
+    var mouse = new THREE.Vector2();
+    THREE.MOUSE = { LEFT: 0, MIDDLE: 1, RIGHT: 2 };
 
     init();
     animate();
@@ -153,8 +156,47 @@
       // finally add the sound to the mesh
       mesh.add( sound );
 
+      document.addEventListener('click', onDocumentMouseDown, false);
+
       window.addEventListener('resize', resize, false);
       setTimeout(resize, 1);
+    }
+
+    function onDocumentMouseDown(event) {
+      console.log("clicked")
+      event.preventDefault();
+
+      mouse.x = ( event.clientX / renderer.domElement.clientWidth ) * 2 - 1;
+      mouse.y = - ( event.clientY / renderer.domElement.clientHeight ) * 2 + 1;
+
+      raycaster.setFromCamera( mouse, camera );
+
+      var intersects = raycaster.intersectObjects( meshObjects );
+
+      console.log("x="+mouse.x)
+      console.log("y="+mouse.y)
+
+      if ( intersects.length > 0 ) {
+        console.log(intersects[0].object)
+
+        picH = 20;
+        picW = 20; 
+          
+        // var holiTexture = new THREE.ImageUtils.loadTexture('textures/sprites/explosion1.png');
+        // var holiMaterial = new THREE.MeshBasicMaterial({map:holiTexture, side:THREE.DoubleSide, transparent: true});
+        // var holiGeometry = new THREE.PlaneGeometry(picW, picH);
+        // var holi = new THREE.Mesh(holiGeometry, holiMaterial);
+        // holi.position.z = (intersects[0].object.position.z);
+        // holi.position.x = intersects[0].object.position.x;
+        // holi.position.y = intersects[0].object.position.y;
+        // scene.add(holi);
+        castShadow = true
+        var holiMap = new THREE.TextureLoader().load( 'textures/sprites/explosion1.png' );
+        var holiMaterial = new THREE.SpriteMaterial( { map: holiMap} );
+        var holi = new THREE.Sprite( holiMaterial );
+        // holi.scale.set(0, 10, 0)
+        scene.add( holi );
+      }
     }
 
     function resize() {
