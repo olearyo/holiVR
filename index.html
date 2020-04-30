@@ -127,7 +127,7 @@
 
       // people images on screen
       picTextureArray = ['images/boy1.png', 'images/couple1.png', 'images/girl1.png', 'images/jump.png', 'images/aunty.png', 'images/excited.png', 'images/granpa.png', 'images/group.png', 'images/guy1.png', 'images/jump.png', 'images/pareja.png', 'images/pareja1.png'];
-      meshObjects = []
+      meshObjects = [];
       positionXArray = [20, 0, 30, 20, 40, -10, 5, -20, 10, 20, -10, -30];
       positionYArray = [12, 14, 12, 15, 14, 12, 14, 15, 16, 12, 14, 11];
       positionZArray = [30, 30, -20, -40, 30, -40, -20, -20, -30, -20, 15, 25];
@@ -194,6 +194,7 @@
         var holiMap = new THREE.TextureLoader().load( 'textures/sprites/explosion1.png' );
         var holiMaterial = new THREE.SpriteMaterial( { map: holiMap} );
         var holi = new THREE.Sprite( holiMaterial );
+        holi.raycast(raycaster, intersects);
         // holi.scale.set(0, 10, 0)
         scene.add( holi );
       }
